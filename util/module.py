@@ -74,6 +74,8 @@ def to_json(module, user_id):
             module_json['code'] = prog['code']
             module_json['default_code'] = prog['default_code']
             module_json['edulint_source_id'] = prog['edulint_source_id']
+            module_json['languages'] = prog['languages']
+
             if 'last_datetime' in prog:
                 module_json['last_datetime'] = prog['last_datetime'].isoformat()
             if 'last_origin' in prog:
