@@ -122,11 +122,9 @@ class Reporter(object):
 
 
 def to_json(db_dict, user_id, module_id, last_eval, task_id):
-    print(db_dict)
     code = {
         'default_code': db_dict['programming']['default_code'],
         'code': db_dict['programming']['default_code'],
-        'languages': db_dict['programming']['languages']
     }
 
     user_id_hashed = sha256(f"{util.config.salt()}{user_id}".encode('ascii')).hexdigest()
