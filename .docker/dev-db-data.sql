@@ -5,6 +5,8 @@ INSERT INTO "tasks" ("id","title","author","co_author","wave","prerequisite","in
 <h3 id="h2">H2</h3>
 <p>More solution.</p>
 ',1,NULL,'2024-08-10 15:43:35.120071','2099-01-01 23:59:59.000000',0,'2024/vlna1/uloha_01_first_task','master','7bef31b57bb0d57167fb86a998218be35b74782b',NULL,'2024-08-10 16:22:05.637466','done','');
+INSERT INTO "languages" ("id","name","extension") VALUES (1,'Python','py');
+INSERT INTO "module_languages" ("id","module_id","language_id") VALUES (1,1,1);
 INSERT INTO "waves" ("id","year","index","caption","garant","time_published") VALUES (1,1,1,'First Wave',1,'2098-12-31 23:00:00.000000');
 INSERT INTO "profiles" ("user_id","addr_street","addr_city","addr_zip","addr_country","school_name","school_street","school_city","school_zip","school_country","school_finish","tshirt_size","referral") VALUES (1,'Street 1','City','123','cz','Uni','Street Uni','City Uni','456','cz',2000,'NA',NULL);
 INSERT INTO "articles" ("id","author","title","body","picture","time_created","published","year","resource") VALUES (1,1,'Welcome to the test site!','<p>This is a test site with a very simple testing content.</p>',NULL,'1999-12-31 23:00:00.000000',1,1,'articles/1');

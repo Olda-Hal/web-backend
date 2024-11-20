@@ -68,6 +68,7 @@ def to_json(module, user_id):
 
     try:
         if _module.type == ModuleType.PROGRAMMING:
+            # print callstack
             prog = util.programming.to_json(
                 json.loads(_module.data), user_id, _module.id, evaluation, _module.task
             )

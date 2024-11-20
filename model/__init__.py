@@ -26,4 +26,6 @@ from model.active_orgs import ActiveOrg
 from model.feedback import Feedback
 from model.user_notify import UserNotify
 from model.diploma import Diploma
+from model.languages import Language
+from model.module_languages import ModuleLanguages
 
