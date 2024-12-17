@@ -29,3 +29,4 @@ class Evaluation(Base):
     full_report = Column(Text, nullable=False, default="")
     time = Column(TIMESTAMP, default=datetime.datetime.utcnow,
                   server_default=text('CURRENT_TIMESTAMP'))
+    language_id = Column(ForeignKey('languages.id'), nullable=False)

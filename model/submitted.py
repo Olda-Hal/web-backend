@@ -31,3 +31,4 @@ class SubmittedCode(Base):
     evaluation = Column(Integer, ForeignKey(Evaluation.id, ondelete='CASCADE'),
                         nullable=False)
     code = Column(Text, nullable=False)
+    language_id = Column(ForeignKey('languages.id'), nullable=False)
