@@ -643,25 +643,37 @@ def process_module_programming(module: model.Module, lines: List[str],
                                specific: ModuleSpecs,
                                source_path: str) -> List[str]:
     log("Processing programming module")
-
-    # Hledame vzorovy kod v zadani
+    # Hledame vsechny vzorove kody v zadani
+    code_blocks = []
     line = 0
-    while (line < len(lines)) and (not re.match(r"^```~python", lines[line])):
+    while line < len(lines):
+        if re.match(r"^```~", lines[line]):
+            language = re.match(r"^```~(\w+)", lines[line]).group(1)
+            end = line + 1
+            while end < len(lines) and not re.match(r"^```", lines[end]):
+                end += 1
+            if end < len(lines):
+                code_blocks.append((''.join(lines[line + 1:end]), language))
+                line = end
         line += 1
-    if line == len(lines):
-        return lines
+        
 
-    # Hledame konec kodu
-    end = line + 1
-    while (end < len(lines)) and (not re.match(r"^```", lines[end])):
-        end += 1
 
-    code = ''.join(lines[line + 1:end])
+        
 
     # Pridame vzorovy kod do \module.data
     data = {}
     data['programming'] = {}
-    data['programming']['default_code'] = code
+        
+    # pokud je jediny codeblock a je python tak ho pouzijeme jako defaultni bez specialni struktury
+    # tohle je kvuli legacy modulum co nepocitaly s multi language supportem
+    if len(code_blocks) == 1 and code_blocks[0][1] == "python":
+        data['programming']['default_code'] = code_blocks[0][0]
+    else:
+        data['programming']['default_code'] = {}
+        for code, lang in code_blocks:
+            data['programming']['default_code'][lang] = code
+
     if 'version' in specific:
         data['programming']['version'] = specific['version']
 

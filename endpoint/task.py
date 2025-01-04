@@ -136,7 +136,6 @@ class TaskDetails(object):
             posts = []
             for thread in threads:
                 posts += thread.posts
-
             req.context['result'] = {
                 'taskDetails': util.task.details_to_json(
                     task, user, status, achievements, best_scores,

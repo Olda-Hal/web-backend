@@ -67,14 +67,14 @@ def to_json(module, user_id):
     module_json['score'] =\
         _module.id if best is not None and task.evaluation_public else None
 
-    # Ziskame povolene jazyky pro programovaci modul
+    
     
     try:
         if _module.type == ModuleType.PROGRAMMING:
             prog = util.programming.to_json(
                 json.loads(_module.data), user_id, _module.id, evaluation, _module.task
             )
-            
+            # Ziskame povolene jazyky pro programovaci modul
             languages = session.query(model.ModuleLanguages, model.Language).\
             join(model.Language, model.ModuleLanguages.language_id == model.Language.id).\
             filter(model.ModuleLanguages.module_id == module.id).\
@@ -85,6 +85,9 @@ def to_json(module, user_id):
                 module_json['allowed_languages'] = [{'id': 1, 'name': 'Python'}]
             else:
                 module_json['allowed_languages'] = [{'id': lang.Language.id, 'name': lang.Language.name} for lang in languages]
+            
+            # ziskame default kod a posledni submitnuty kod uzivatele pro kazdy jazyk
+            
             module_json['code'] = prog['code']
             module_json['default_code'] = prog['default_code']
             module_json['edulint_source_id'] = prog['edulint_source_id']
